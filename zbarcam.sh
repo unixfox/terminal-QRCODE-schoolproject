@@ -1,16 +1,13 @@
 #!/bin/bash
 while :
 do
-	DATE=$(date)
-	start="08:00:00"
-    end="17:00:00"
 	trap ctrl_c INT
 	endScan=0;
 	function ctrl_c() {
 	 endScan=1;
 	}
 	tmp=/tmp/barcode.$$
-	LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so zbarcam --raw > $tmp &
+	zbarcam --raw > $tmp &
 	pid=$!
 	while [[ ! -s $tmp ]] ; do
 	 sleep 1
